@@ -1,0 +1,137 @@
+{
+  "name": "my-package",
+  "groupId": "",
+  "version": "0.1.0-SNAPSHOT",
+  "modelVersion": "9.1.1",
+  "docType": "webpackage",
+  "author": {
+    "name": "Judit Ross",
+    "email": "judit.ross@incowia.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "man": [],
+  "artifacts": {
+    "apps": [
+      {
+        "artifactId": "docs",
+        "description": "Generated webpackage documentation.",
+        "runnables": [
+          {
+            "name": "docs",
+            "path": "/index.html",
+            "description": "Show the interface of this component."
+          }
+        ]
+      }
+    ],
+    "elementaryComponents": [],
+    "compoundComponents": [
+      {
+        "artifactId": "first-compound",
+        "description": "This is a cubbles-compound-component.",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/first-compound.css"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "com.incowia.basic-html-components@1.2",
+            "artifactId": "cubx-date-input"
+          }
+        ],
+        "slots": [
+
+        ],
+        "members": [
+          {
+            "memberId": "member1",
+            "artifactId": "cubx-date-input"
+          }
+        ],
+        "connections": [],
+        "inits": []
+      },
+      {
+        "artifactId": "second-compound",
+        "description": "This is a cubbles-compound-component.",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/second-compound.css"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "com.incowia.basic-html-components@1.2",
+            "artifactId": "cubx-color-input"
+          }
+        ],
+        "slots": [],
+        "members": [
+          {
+            "memberId": "member1",
+            "artifactId": "cubx-color-input"
+          }
+        ],
+        "connections": [],
+        "inits": []
+      },
+      {
+        "artifactId": "third-compound",
+        "description": "This is a cubbles-compound-component.",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/third-compound.css"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "com.incowia.basic-html-components@1.2",
+            "artifactId": "cubx-text-input"
+          }
+        ],
+        "slots": [],
+        "members": [
+          {
+            "memberId": "member1",
+            "artifactId": "cubx-text-input"
+          }
+        ],
+        "connections": [],
+        "inits": []
+      }
+    ],
+    "utilities": []
+  }
+}
