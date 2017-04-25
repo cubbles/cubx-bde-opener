@@ -1,6 +1,6 @@
 {
   "name": "cubx-bde-opener",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "open a compound of a webpackage in the bde",
   "main": "./lib/cubx-bde-opener.js",
   "directories": {
