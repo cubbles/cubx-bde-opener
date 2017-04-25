@@ -4,11 +4,13 @@ const chai = require('chai');
 const expect = chai.expect;
 chai.config.includeStack = true;
 // const should = chai.should();
-const portChecker = require('../../lib/port-checker');
+const portinUse = require('../../lib/port-checker');
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
 var tls = require('tls');
+
+// Check if port in use manually: netstat -ano | findstr 8282
 
 function createHttpsServer () {
   var privateKeyPath = path.join('test', 'etc', 'localhostKey.pem');
@@ -29,7 +31,7 @@ function createHttpsServer () {
 }
 
 function createHttpServer () {
-  return http.createServer( function (s) {
+  return http.createServer(function (s) {
     s.write('welcome!\n');
     s.pipe(s);
   });
@@ -44,17 +46,17 @@ describe('port-checker', function () {
   describe('start no server on port 8282', function () {
     var promise;
     beforeEach(function () {
-      promise = portChecker(port);
+      promise = portinUse(port);
+    });
+    afterEach(function () {
+      promise = null;
     });
     it('the port 8282 is not in usage', function (done) {
-      promise.then((value) => {
-        expect(value).to.be.false;
-        done();
-      })
-        .catch((err) => {
-          expect(err).not.to.be.exists;
-          done();
-        });
+      promise
+        .then((value) => {
+          console.log('value', value);
+          expect(value).to.be.false;
+        }).then(() => done(), error => done(error));
     });
   });
 
@@ -77,18 +79,16 @@ describe('port-checker', function () {
       console.log('http server stopped');
     });
     beforeEach(function () {
-      promise = portChecker(port);
+      promise = portinUse(port);
+    });
+    afterEach(function () {
+      promise = null;
     });
     it('the port 8282 is in usage', function (done) {
-      promise.then((value) => {
-        expect(value).to.be.true;
-        done();
-      })
-      .catch((err) => {
-        console.log(err);
-        expect(err).not.to.be.exists;
-        done();
-      });
+      promise
+        .then((value) => {
+          expect(value).to.be.true;
+        }).then(() => done(), error => done(error));
     });
   });
   describe('https server on port 8282', function () {
@@ -111,19 +111,15 @@ describe('port-checker', function () {
       console.log('https server stopped');
     });
     beforeEach(function () {
-      promise = portChecker(port);
+      promise = portinUse(port);
+    });
+    afterEach(function () {
+      promise = null;
     });
     it('the port 8282 is in usage', function (done) {
       promise.then((value) => {
         expect(value).to.be.true;
-        done();
-      })
-        .catch((err) => {
-          console.log(err);
-          expect(err).not.to.be.exists;
-          done();
-        });
+      }).then(() => done(), error => done(error));
     });
   });
-
 });

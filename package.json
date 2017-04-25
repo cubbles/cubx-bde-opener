@@ -26,10 +26,10 @@
     "fs-extra": "^2.1.2",
     "inquirer": "^3.0.6",
     "minimist": "^1.2.0",
-    "opener": "^1.4.3",
-    "portastic": "^1.0.1"
+    "opener": "^1.4.3"
   },
   "devDependencies": {
+    "bdd-stdin": "^0.2.0",
     "chai": "^3.5.0",
     "cubx-grunt-http-server": "^0.3.0",
     "eslint": "^2.4.0",

@@ -26,29 +26,20 @@ describe('manifest-reader', function () {
       manifestReader = new ManifestReader(webpackagePath);
       promise = manifestReader.getManifest();
     });
+    afterEach(function () {
+      promise = null;
+    });
     it('read manifest should success', function (done) {
       promise.then((value) => {
         console.log('value', value);
         expect(value).to.be.an('object');
-        done();
-      })
-      .catch((err) => {
-        console.log('err', err);
-        expect(err).to.be.not.exist;
-        done();
-      });
+      }).then(() => done(), error => done(error));
     });
     it('the manifest name property is "my-package"', function (done) {
       promise.then((value) => {
         console.log('value', value);
         value.should.have.property('name', 'my-package');
-        done();
-      })
-        .catch((err) => {
-          console.log('err', err);
-          expect(err).to.be.not.exist;
-          done();
-        });
+      }).then(() => done(), error => done(error));
     });
   });
 });
