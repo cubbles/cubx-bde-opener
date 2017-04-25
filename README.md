@@ -1,4 +1,5 @@
 # cubx-bde-opener
+[![Build Status](https://travis-ci.org/cubbles/cubx-bde-opener.svg?branch=master)](https://travis-ci.org/cubbles/bde-opener)
 
 ## install
 Install the npm package:
