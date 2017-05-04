@@ -37,13 +37,13 @@ function createHttpServer () {
   });
 }
 
-describe('port-checker', function () {
+describe('port-checker:', function () {
   var port;
   before(function () {
     port = 8282;
   });
 
-  describe('start no server on port 8282', function () {
+  describe('No server runs on port 8282,', function () {
     var promise;
     beforeEach(function () {
       promise = portinUse(port);
@@ -60,7 +60,7 @@ describe('port-checker', function () {
     });
   });
 
-  describe('http server on port 8282', function () {
+  describe('http server on localhost and port 8282', function () {
     var server;
     var promise;
     before(function (done) {
@@ -91,7 +91,38 @@ describe('port-checker', function () {
         }).then(() => done(), error => done(error));
     });
   });
-  describe('https server on port 8282', function () {
+  describe('http server on "0.0.0.0" and port 8282', function () {
+    var server;
+    var promise;
+    before(function (done) {
+      server = createHttpServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Hello, world!\n');
+      });
+      server.listen(port, '0.0.0.0');
+      server.on('listening', () => {
+        console.log('http server started');
+        done();
+      });
+    });
+    after(function () {
+      server.close();
+      console.log('http server stopped');
+    });
+    beforeEach(function () {
+      promise = portinUse(port);
+    });
+    afterEach(function () {
+      promise = null;
+    });
+    it('the port 8282 is in usage', function (done) {
+      promise
+        .then((value) => {
+          expect(value).to.be.true;
+        }).then(() => done(), error => done(error));
+    });
+  });
+  describe('https server on "0.0.0.0" port 8282', function () {
     var server;
     var promise;
     before(function (done) {
@@ -100,7 +131,7 @@ describe('port-checker', function () {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end('Hello, world!\n');
       });
-      server.listen(port, 'localhost');
+      server.listen(port, '0.0.0.0');
       server.on('listening', () => {
         console.log('https server started');
         done();
